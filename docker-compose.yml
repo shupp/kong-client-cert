@@ -1,0 +1,27 @@
+version: "2.0"
+services:
+  kong-database:
+    restart: always
+    image: cassandra:2.2
+    ports:
+      - "9042:9042"
+  kong:
+    restart: always
+    build: .
+    # using port 900X instead of 800X to avoid consul
+    ports:
+      - "9000:8000"
+      - "9443:8443"
+      - "9001:8001"
+      - "7946:7946"
+      - "7946:7946/udp"
+    links:
+      - kong-database:kong-database
+    environment:
+      - KONG_DATABASE=cassandra
+      - KONG_CASSANDRA_CONTACT_POINTS=kong-database
+      - KONG_PG_HOST=kong-database
+      - SECRET_CLIENT_KEY=${SECRET_CLIENT_KEY}
+      - SECRET_CLIENT_CERT=${SECRET_CLIENT_CERT}
+    depends_on:
+      - kong-database
