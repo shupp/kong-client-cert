@@ -25,7 +25,7 @@ Note that the _client.key_ file has no password set.
 
 # Caveats
 
-This proxy_ssl_certificate directive is global to all apis proxied by this kong instance.  In addition, I haven't yet tested what happens when you the client to kong supplies its own certificate.. is that dropped between kong and the API?
+This proxy_ssl_certificate directive is global to all apis proxied by this kong instance.  In addition, I haven't yet tested what happens when the http client to kong supplies its own certificate.. is that dropped between kong and the API?
 
 # Links
 
