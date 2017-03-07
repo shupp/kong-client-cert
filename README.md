@@ -1,5 +1,5 @@
 # Overview
-kong-client-cert is a way to enable a client certificate when communicating from kong to your proxied api server.  If **SECRET_CLIENT_KEY** and **SECRET_CLIENT_CERT** environment variables are set in this container, their contents get written to client.key and client.crt in /usr/local/kong/ssl, respectively.  A custom nginx.conf file is generated to set the following directives:
+This build of kong is a way to enable a client certificate when communicating from kong to your proxied api server.  If **SECRET_CLIENT_KEY** and **SECRET_CLIENT_CERT** environment variables are set in this container, their contents get written to client.key and client.crt in /usr/local/kong/ssl, respectively.  A custom nginx.conf file is generated to set the following directives:
 
     proxy_ssl_certificate_key /usr/local/kong/ssl/client.key;
     proxy_ssl_certificate /usr/local/kong/ssl/client.crt;
