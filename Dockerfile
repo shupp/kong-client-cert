@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 MAINTAINER Bill Shupp, bill@shupp.org
 
-ENV KONG_VERSION 0.9.9
+ENV KONG_VERSION 0.10.0
 
 RUN apt-get update && apt-get install -y curl netcat openssl libpcre3 dnsmasq procps perl
 

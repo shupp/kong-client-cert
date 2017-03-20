@@ -12,7 +12,7 @@ NGINX_KONG_CONTENTS=`cat ${NGINX_KONG_TEMPLATE} | sed -e 1d -e ${NGINX_KONG_LEN}
 
 # Store new proxy block contents in variable
 IFS='' read -r -d '' PROXY_BLOCK << EOF
-        proxy_pass \$upstream_url;
+        proxy_pass \$upstream_scheme://kong_upstream;
 > if ssl then
         proxy_ssl_certificate_key /usr/local/kong/ssl/client.key;
         proxy_ssl_certificate /usr/local/kong/ssl/client.crt;
@@ -21,7 +21,7 @@ EOF
 
 # add prox block to nginx-kong contents, then indent this block
 NGINX_KONG_CONTENTS=`echo "$NGINX_KONG_CONTENTS" |  \
-    awk -v find='        proxy_pass $upstream_url;' \
+    awk -v find='        proxy_pass $upstream_scheme://kong_upstream;' \
     -v replace="$PROXY_BLOCK" \
     's=index($0,find){$0=substr($0,1,s-1) replace substr($0,s+length(find))}1'`
 
